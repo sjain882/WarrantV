@@ -94,7 +94,7 @@ namespace WarrantV
                                 Function.Call(Hash.FLASH_MINIMAP_DISPLAY);
                             }
                         }
-                    if (CallDelay == 0 || (cop.IsRagdoll || cop.IsGettingUp || cop.IsGettingIntoVehicle || cop.IsClimbing || cop.IsBeingStealthKilled || cop.IsBeingStunned || cop.IsBeingStealthKilled)) CallDelay = Game.GameTime + Config.Numeric.BaseTimeToCall + (1000 * new Random().Next(Config.Numeric.AddedRandomTimeToCallMin, Config.Numeric.AddedRandomTimeToCallMax));
+                    if (CallDelay == 0 || (cop.IsRagdoll || cop.IsGettingUp || cop.IsEnteringVehicle || cop.IsClimbing || cop.IsBeingStealthKilled || cop.IsBeingStunned || cop.IsBeingStealthKilled)) CallDelay = Game.GameTime + Config.Numeric.BaseTimeToCall + (1000 * new Random().Next(Config.Numeric.AddedRandomTimeToCallMin, Config.Numeric.AddedRandomTimeToCallMax));
                     if (CallDelay > 0 && CallDelay - Config.Numeric.CallTime <= Game.GameTime)
                     {
                         if (cop.IsInVehicle())
@@ -106,7 +106,7 @@ namespace WarrantV
                                     if (Config.Bools.CopCallAnim)
                                     {
                                         cop.Task.UseMobilePhone(Config.Numeric.CallTime);
-                                        cop.CurrentVehicle.LockStatus = VehicleLockStatus.Locked;
+                                        cop.CurrentVehicle.LockStatus = VehicleLockStatus.CannotEnter;
                                     }
                                     CallDelay = -CallDelay;
                                 }
@@ -116,7 +116,7 @@ namespace WarrantV
                                 if (Config.Bools.CopCallAnim)
                                 {
                                     cop.Task.UseMobilePhone(Config.Numeric.CallTime);
-                                    cop.CurrentVehicle.LockStatus = VehicleLockStatus.Locked;
+                                    cop.CurrentVehicle.LockStatus = VehicleLockStatus.CannotEnter;
                                 }
                                 CallDelay = -CallDelay;
 
@@ -279,7 +279,7 @@ namespace WarrantV
 
                     if (bribing)
                     {
-                        Game.Player.CanControlCharacter = false;
+                        Game.Player.SetControlState(false, SetPlayerControlFlags.LeaveCameraControlOn);
                         string bribeText = Config.Strings.PhoneLeave;//$"Press ~INPUT_PICKUP~ to leave the telephone"
                         string playerNow = "";
                         switch (Helpers.PlayerID())
@@ -355,7 +355,7 @@ namespace WarrantV
                     else PlateChangeAble = false;
                     foreach (Vector3 sellerPos in Helpers.PayAndSprayLocations)
                     {
-                        World.DrawMarker(MarkerType.VerticalCylinder, sellerPos - new Vector3(0, 0, 1f), new Vector3(), new Vector3(), new Vector3(1, 1, 1), Color.Yellow);
+                        World.DrawMarker(MarkerType.Cylinder, sellerPos - new Vector3(0, 0, 1f), new Vector3(), new Vector3(), new Vector3(1, 1, 1), Color.Yellow);
                         if (HelpMessageSellerDelay == 0)
                         {
                             if (Game.Player.Character.Position.DistanceTo(sellerPos) <= 0.66f)

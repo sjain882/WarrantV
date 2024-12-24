@@ -237,9 +237,9 @@ namespace WarrantV
                 blip.Priority = 13;
                 if (TaskType <= 1 && Game.Player.WantedLevel == 0 && Config.Bools.CopsDoTasks)
                 {
-                    if (!cop.IsInVehicle()) cop.Task.GoTo(LastSeen); else cop.Task.DriveTo(cop.CurrentVehicle, LastSeen, 1, 40, DrivingStyle.Normal);
+                    if (!cop.IsInVehicle()) cop.Task.GoStraightTo(LastSeen); else cop.Task.DriveTo(cop.CurrentVehicle, LastSeen, 40,VehicleDrivingFlags.SteerAroundPeds,2f);
                     if (LastSeen.DistanceTo(cop.Position) <= 3) ReturnTaskType = 0; else ReturnTaskType = 2;
-                    cop.AlwaysKeepTask = true;
+                    cop.KeepTaskWhenMarkedAsNoLongerNeeded = true;
                 }
             }
             if (Recog[0] > 80 || Recog[1] > 80)
@@ -248,9 +248,9 @@ namespace WarrantV
                 blip.Priority = 14;
                 if (TaskType <= 2 && Game.Player.WantedLevel == 0 && Config.Bools.CopsDoTasks)
                 {
-                    if (!cop.IsInVehicle()) cop.Task.RunTo(LastSeen, false); else cop.Task.DriveTo(cop.CurrentVehicle, LastSeen, 1, 70, DrivingStyle.AvoidTraffic);
+                    if (!cop.IsInVehicle()) cop.Task.RunTo(LastSeen, false); else cop.Task.DriveTo(cop.CurrentVehicle, LastSeen, 70, VehicleDrivingFlags.DrivingModeAvoidVehiclesReckless,2f);
                     if (LastSeen.DistanceTo2D(cop.Position) <= 1) ReturnTaskType = 0; else ReturnTaskType = 3;
-                    cop.AlwaysKeepTask = true;
+                    cop.KeepTaskWhenMarkedAsNoLongerNeeded = true;
                 }
             }
             if (Recog[0] >= 100 || Recog[1] >= 100)
@@ -294,7 +294,7 @@ namespace WarrantV
                 saveString += Environment.NewLine;
             }
             File.WriteAllText(SaveFile, saveString);
-            if (Config.Bools.CrashAndEnterMessage) GTA.UI.Notification.Show(Config.Strings.WarrantsVSaved);//"WarrantsV Saved"
+            if (Config.Bools.CrashAndEnterMessage) GTA.UI.Notification.PostTicker(Config.Strings.WarrantsVSaved,false);//"WarrantsV Saved"
         }
         public static void Load()
         {
@@ -397,7 +397,7 @@ namespace WarrantV
             {
                 rainy = Config.Numeric.RecognitionAddBadWeather;
             }
-            if (World.CurrentTimeOfDay >= TimeSpan.FromHours(22) || World.CurrentTimeOfDay < TimeSpan.FromHours(5)) night = Config.Numeric.RecognitionAddNight;
+            if (GTA.Chrono.GameClock.Hour >= 22 || GTA.Chrono.GameClock.Hour < 5) night = Config.Numeric.RecognitionAddNight;
             if (Game.Player.Character.IsInVehicle())
             {
                 if (!Function.Call<bool>(Hash.IS_PED_FACING_PED, Game.Player.Character, byWhom, 110f) && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.Boats && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.Cycles && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.Motorcycles && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.OffRoad) return 0;
@@ -462,7 +462,7 @@ namespace WarrantV
                 {
                     rainy = Config.Numeric.VehRecognitionAddBadWeather;
                 }
-                if (World.CurrentTimeOfDay >= TimeSpan.FromHours(22) || World.CurrentTimeOfDay < TimeSpan.FromHours(5)) night = Config.Numeric.VehRecognitionAddNight;
+                if (GTA.Chrono.GameClock.Hour >= 22 || GTA.Chrono.GameClock.Hour < 5) night = Config.Numeric.VehRecognitionAddNight;
                 if (distance <= Config.Numeric.VehRecognitionAddVisiblePlateMaxDist)
                 {
                     if (Game.Player.Character.CurrentVehicle.Mods.LicensePlateType == LicensePlateType.FrontPlate && Function.Call<bool>(Hash.IS_PED_FACING_PED, Game.Player.Character, byWhom, 35f))
