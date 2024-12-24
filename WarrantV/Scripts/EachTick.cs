@@ -306,7 +306,7 @@ namespace WarrantV
                     {
                         if (!Helpers.ObjectBroken(ClosestPhone))
                         {
-                            Screen.ShowSubtitle($"player: {Game.Player.Character.Rotation} phone: {ClosestPhone.Rotation}");
+                            if(Config.Bools.debug) Screen.ShowSubtitle($"player: {Game.Player.Character.Rotation} phone: {ClosestPhone.Rotation}");
 
                             if (Game.IsKeyPressed(System.Windows.Forms.Keys.E) && Game.GameTime >= -(HelpMessagePhoneDelay))
                             {
