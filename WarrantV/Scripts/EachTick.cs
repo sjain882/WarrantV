@@ -21,7 +21,11 @@ namespace WarrantV
         public static int[] StarsEvaded = new int[3];
         public static Vector3 LastCopsPosition;
         public static Blip LastCopsPositionBlip;
+<<<<<<< HEAD
         public static int LastCopsPositionBlipTimer = 0, CopsLostTimer = 0;
+=======
+        public static int LastCopsPositionBlipTimer=0, CopsLostTimer=0;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         public static void Ped(Ped cop)
         {
             if (!Helpers.CopsList.Any(c => c.Item1 == cop))
@@ -40,18 +44,30 @@ namespace WarrantV
             if (!cop.IsAlive) { Recognition[0] = 0; Recognition[1] = 0; goto SavePed; }
             NewTaskType = Helpers.BlipHandle(cop, CopBlip, new float[] { Recognition[0], Recognition[1] }, TaskType, LastSeenPos, Helpers.Visible(Game.Player.Character, cop, Config.Numeric.CopsFOV, Config.Numeric.CopsVisibleDistance, Config.Numeric.CopsFOVinVeh));
             {
+<<<<<<< HEAD
                 if ((Helpers.CopsList.Count > 15 && (Main.Even && Index % 2 == 0) || (!Main.Even && Index % 2 == 1)) || Helpers.CopsList.Count <= 15)
+=======
+                if ((Helpers.CopsList.Count>15&&(Main.Even && Index % 2 == 0) || (!Main.Even && Index % 2 == 1))||Helpers.CopsList.Count<=15)
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 {
                     if (Helpers.Visible(Game.Player.Character, cop, Config.Numeric.CopsFOV, Config.Numeric.CopsVisibleDistance, Config.Numeric.CopsFOVinVeh))
                     {
                         LastSeen = Game.GameTime + Config.Numeric.TimeToLoseInterest;
                         LastSeenPos = Game.Player.Character.Position;
                         NewTaskType = 0;
+<<<<<<< HEAD
                         if (Helpers.CompareArrays(RecognizedClothes[Helpers.PlayerID()].Item1, Helpers.GetPlayerClothes(), Config.Numeric.ClothesDifferencesToClearWarrant, true).Item1 && ((Recognition[0] > Config.Numeric.RememberNewClothesWhenAlmostRecognizedNumber && !Helpers.Masked().Item1) || (Game.Player.WantedLevel > 0 && Recognized[0]))) RecognizedClothes[Helpers.PlayerID()] = (Helpers.GetPlayerClothes(), RecognizedClothes[Helpers.PlayerID()].Item2); //when recognized > x remember new clothes
                         if (WarrantLevel[Helpers.PlayerID()] > 0 || WarrantLevelVeh > 0 || Game.Player.WantedLevel > 0 || Helpers.Masked().Item1)
                         {
                             if (!Recognized[0] && (WarrantLevel[Helpers.PlayerID()] > 0 || Game.Player.WantedLevel > 0 || Helpers.Masked().Item1)) if (Helpers.CopsList.Count > 15) Recognition[0] += Helpers.RecognitionAdd(cop) * 2; else Recognition[0] += Helpers.RecognitionAdd(cop);
                             if (!Recognized[1] && (WarrantLevelVeh > 0 || Game.Player.WantedLevel > 0)) if (Helpers.CopsList.Count > 15) Recognition[1] += Helpers.RecognitionAddCar(cop) * 2; else Recognition[1] += Helpers.RecognitionAddCar(cop);
+=======
+                        if (Helpers.CompareArrays(RecognizedClothes[Helpers.PlayerID()].Item1, Helpers.GetPlayerClothes(), Config.Numeric.ClothesDifferencesToClearWarrant, true).Item1 && ((Recognition[0] > 70 && !Helpers.Masked().Item1) || (Game.Player.WantedLevel > 0 && Recognized[0]))) RecognizedClothes[Helpers.PlayerID()] = (Helpers.GetPlayerClothes(), RecognizedClothes[Helpers.PlayerID()].Item2);
+                        if (WarrantLevel[Helpers.PlayerID()] > 0 || WarrantLevelVeh > 0 || Game.Player.WantedLevel > 0 || Helpers.Masked().Item1)
+                        {
+                            if (!Recognized[0] && (WarrantLevel[Helpers.PlayerID()] > 0 || Game.Player.WantedLevel > 0 || Helpers.Masked().Item1)) if (Helpers.CopsList.Count > 15) Recognition[0] += Helpers.RecognitionAdd(cop) * 2; else Recognition[0] += Helpers.RecognitionAdd(cop);
+                            if (!Recognized[1] && (WarrantLevelVeh > 0 || Game.Player.WantedLevel > 0)) if(Helpers.CopsList.Count > 15) Recognition[1] += Helpers.RecognitionAddCar(cop) * 2; else Recognition[1] += Helpers.RecognitionAddCar(cop);
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                         }
                     }
                 }
@@ -79,12 +95,20 @@ namespace WarrantV
                     Recognition[1] = 0;
                 }
 
+<<<<<<< HEAD
                 if (Recognized[0] || (Helpers.Masked().Item1 && (Game.Player.WantedLevel > 0 || Function.Call<int>(Hash.GET_FAKE_WANTED_LEVEL) > 0))) Recognition[0] = 0;
+=======
+                if (Recognized[0] || (Helpers.Masked().Item1 && (Game.Player.WantedLevel > 0||Function.Call<int>(Hash.GET_FAKE_WANTED_LEVEL)>0))) Recognition[0] = 0;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 if (Recognized[1]) Recognition[1] = 0;
                 if (!Game.Player.Character.IsInVehicle()) Recognition[1] = 0;
                 if (Recognition[0] == 100 || Recognition[1] == 100)
                 {
+<<<<<<< HEAD
                     if (Config.Bools.WantedWhenMasked) if (Helpers.Masked().Item1 && Game.Player.WantedLevel == 0)
+=======
+                    if(Config.Bools.WantedWhenMasked)if (Helpers.Masked().Item1 && Game.Player.WantedLevel == 0) 
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                         {
                             Game.Player.WantedLevel = 1;
                             Recognition[0] = 0;
@@ -123,7 +147,11 @@ namespace WarrantV
                             }
 
                         }
+<<<<<<< HEAD
                         else if (cop.Position.DistanceTo(Game.Player.Character.Position) >= Config.Numeric.MinDistToCall || Game.Player.WantedLevel == 0)
+=======
+                        else if (cop.Position.DistanceTo(Game.Player.Character.Position) >= Config.Numeric.MinDistToCall || Game.Player.WantedLevel==0)
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                         {
                             if (Config.Bools.CopCallAnim)
                             {
@@ -149,7 +177,11 @@ namespace WarrantV
                         }
                         if (Recognition[0] == 100 && !Helpers.Masked().Item1)
                         {
+<<<<<<< HEAD
                             if (WarrantLevel[0] == 0)
+=======
+                            if(WarrantLevel[0]==0)
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                                 RecognizedClothes[Helpers.PlayerID()] = (Helpers.GetPlayerClothes(), Game.Player.WantedLevel);
                             else
                                 RecognizedClothes[Helpers.PlayerID()] = (Helpers.GetPlayerClothes(), WarrantLevel[0]);
@@ -200,6 +232,7 @@ namespace WarrantV
 
         public static void IVChases(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             if (Config.Bools.IVChases)
             {
                 if (Game.Player.WantedLevel > 0)
@@ -219,6 +252,26 @@ namespace WarrantV
                         if (LastCopsPositionBlip != null && LastCopsPositionBlip.Exists()) LastCopsPositionBlip.Delete();
                     }
                     else
+=======
+            if(Config.Bools.IVChases)
+            {
+                if(Game.Player.WantedLevel>0)
+                {
+                    if(LastCopsPositionBlipTimer<Game.GameTime)
+                    {
+                        LastCopsPositionBlipTimer = Game.GameTime+500;
+                        if (LastCopsPositionBlip != null && LastCopsPositionBlip.Exists())
+                        {
+                            if(LastCopsPositionBlip.Color==BlipColor.Red) LastCopsPositionBlip.Color = BlipColor.Blue; else LastCopsPositionBlip.Color = BlipColor.Red;
+                        }
+                    }
+                    if (!Function.Call<bool>(Hash.ARE_PLAYER_STARS_GREYED_OUT,Game.Player))
+                    {
+                        LastCopsPosition = Game.Player.Character.Position;
+                        CopsLostTimer = 0;
+                        if(LastCopsPositionBlip != null && LastCopsPositionBlip.Exists())LastCopsPositionBlip.Delete();
+                    } else
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                     {
                         if (!(LastCopsPositionBlip != null && LastCopsPositionBlip.Exists()))
                         {
@@ -236,6 +289,7 @@ namespace WarrantV
                             CopsLostTimer = 0;
                         }
                     }
+<<<<<<< HEAD
                 }
                 else
                 {
@@ -243,6 +297,14 @@ namespace WarrantV
                     if (LastCopsPositionBlip != null && LastCopsPositionBlip.Exists()) LastCopsPositionBlip.Delete();
                 }
             }
+=======
+                } else
+                {
+                        CopsLostTimer = 0;
+                        if (LastCopsPositionBlip != null && LastCopsPositionBlip.Exists()) LastCopsPositionBlip.Delete();
+                }
+            }    
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         }
 
         public static class ChoiceMenus
@@ -318,6 +380,7 @@ namespace WarrantV
 
             public static void Plates(object sender, EventArgs e)
             {
+<<<<<<< HEAD
                 if (Config.Bools.PlateChanging)
                 {
                     if (HelpMessageSellerDelay < 0 && Game.GameTime > -(HelpMessageSellerDelay)) HelpMessageSellerDelay = 0;
@@ -375,6 +438,62 @@ namespace WarrantV
                             {
                                 Screen.ShowHelpTextThisFrame(Config.Strings.PlateMaxAmnt);//$"You already have max amount of plates."
                             }
+=======
+                if (HelpMessageSellerDelay < 0 && Game.GameTime > -(HelpMessageSellerDelay)) HelpMessageSellerDelay = 0;
+                if (HelpMessageSellerDelay > 0 && Game.GameTime > HelpMessageSellerDelay) HelpMessageSellerDelay = 0;
+                ClosestVeh = World.GetClosestVehicle(Game.Player.Character.Position, 20f);
+                if (Game.Player.Character.LastVehicle != null && Game.Player.Character.LastVehicle.Exists() && Game.Player.Character.LastVehicle.Position.DistanceTo(Game.Player.Character.Position) <= 5f) ClosestVeh = Game.Player.Character.LastVehicle;
+                if (ClosestVeh != null && ClosestVeh.Exists() && ClosestVeh.IsAlive && ClosestVeh.IsSeatFree(VehicleSeat.Driver))
+                {
+                    if (Main.debug)
+                    {
+                        new TextElement("x", Screen.WorldToScreen(ClosestVeh.RearPosition), 0.5f).Draw();
+                        new TextElement($"{ClosestVeh.Mods.LicensePlateType.ToString()}", Screen.WorldToScreen(ClosestVeh.Position), 0.5f).Draw();
+                        new TextElement("x", Screen.WorldToScreen(ClosestVeh.FrontPosition), 0.5f).Draw();
+                    }
+                    if (Game.Player.Character.IsAlive && Game.Player.Character.IsIdle && Game.Player.Character.IsUpright && (Function.Call<bool>(Hash.ARE_PLAYER_STARS_GREYED_OUT, Game.Player) || Game.Player.WantedLevel == 0))
+                    {
+                        if (((ClosestVeh.Mods.LicensePlateType == LicensePlateType.RearPlate || ClosestVeh.Mods.LicensePlateType == LicensePlateType.FrontAndRearPlates) && ClosestVeh.RearPosition.DistanceTo(Game.Player.Character.Position) <= 1f) || (ClosestVeh.Mods.LicensePlateType == LicensePlateType.FrontPlate && ClosestVeh.FrontPosition.DistanceTo(Game.Player.Character.Position) <= 1f))
+                        {
+                            if (Main.Plates[Helpers.PlayerID()] > 0)
+                            {
+                                Screen.ShowHelpTextThisFrame(Config.Strings.PlateChange);//"Press ~INPUT_PICKUP~ to change license plate."
+                                PlateChangeAble = true;
+                            }
+                            else
+                            {
+                                Screen.ShowHelpTextThisFrame(Config.Strings.PlateNoMore);//"You dont have any license plates."
+                                PlateChangeAble = false;
+                            }
+                        }
+                        else PlateChangeAble = false;
+
+                    }
+                    else PlateChangeAble = false;
+                }
+                else PlateChangeAble = false;
+                foreach (Vector3 sellerPos in Helpers.PayAndSprayLocations)
+                {
+                    World.DrawMarker(MarkerType.VerticalCylinder, sellerPos - new Vector3(0, 0, 1f), new Vector3(), new Vector3(), new Vector3(1, 1, 1), Color.Yellow);
+                    if (HelpMessageSellerDelay == 0)
+                    {
+                        if (Game.Player.Character.Position.DistanceTo(sellerPos) <= 0.66f)
+                        {
+                            Screen.ShowHelpTextThisFrame($"{Config.Strings.PlateBuy} {Config.Numeric.PlatePrice}$\n{Config.Strings.PlateBuyInfo} {Main.Plates[Helpers.PlayerID()]}/{Config.Numeric.PlateMaxNum} {Config.Strings.PlateBuyInfo2}");
+                            buying = true;
+                        }
+                        else buying = false;
+                    }
+                    else
+                    {
+                        if (HelpMessageSellerDelay < 0 && Game.GameTime < -(HelpMessageSellerDelay))
+                        {
+                            Screen.ShowHelpTextThisFrame(Config.Strings.PlateNoMoney);//$"You dont have enough money."
+                        }
+                        if (HelpMessageSellerDelay > 0 && Game.GameTime < HelpMessageSellerDelay)
+                        {
+                            Screen.ShowHelpTextThisFrame(Config.Strings.PlateMaxAmnt);//$"You already have max amount of plates."
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                         }
                     }
                 }
@@ -385,7 +504,11 @@ namespace WarrantV
         {
             private static bool[] WasPosterShowed = new bool[2];
             private static float[] AnimState = new float[2] { Config.Numeric.PlayerPosterAnimStartLoc, Config.Numeric.CarPosterAnimStartLoc };
+<<<<<<< HEAD
             private static (int, bool, int) BlinkWanted = (0, false, 255);
+=======
+            private static (int,bool,int) BlinkWanted= (0,false,255);
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
 
             public static void WarrantPosters(object sender, EventArgs e)
             {
@@ -420,8 +543,12 @@ namespace WarrantV
                                     if (BlinkWanted.Item2)
                                     {
                                         BlinkWanted.Item3 += 5;
+<<<<<<< HEAD
                                     }
                                     else
+=======
+                                    } else
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                                     {
                                         BlinkWanted.Item3 -= 5;
                                     }

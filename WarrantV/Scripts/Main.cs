@@ -12,13 +12,21 @@ namespace WarrantV
 {
     public class Main : Script
     {
+<<<<<<< HEAD
         public static bool debug = Config.Bools.debug;
+=======
+        public static bool debug=Config.Bools.debug;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         private static int[] TimesBusted = new int[3];
         private static int TickCounter = Game.GameTime;
         private static bool WasInCar, WasWanted;
         public static int[] Plates = new int[3];
         public static bool Even;
+<<<<<<< HEAD
         public static int LastVehType = 0;
+=======
+        public static int LastVehType=0;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         public static bool OverrideMasked = false;
 
         public Main()
@@ -107,7 +115,11 @@ namespace WarrantV
                     }
                 }
             }
+<<<<<<< HEAD
             if (EachTick.ChoiceMenus.buying && Config.Bools.PlateChanging)
+=======
+            if (EachTick.ChoiceMenus.buying)
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             {
                 if (Game.IsKeyPressed(Config.ETC.PlateBuyKey))
                 {
@@ -123,9 +135,15 @@ namespace WarrantV
                     else EachTick.ChoiceMenus.HelpMessageSellerDelay = Game.GameTime + 2500;
                 }
             }
+<<<<<<< HEAD
             if (EachTick.ChoiceMenus.PlateChangeAble && Config.Bools.PlateChanging)
             {
                 if (Game.IsKeyPressed(Config.ETC.PlateChange))
+=======
+            if(EachTick.ChoiceMenus.PlateChangeAble)
+            {
+                if(Game.IsKeyPressed(Config.ETC.PlateChange))
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 {
                     Plates[Helpers.PlayerID()]--;
                     EachTick.ChoiceMenus.ClosestVeh.Mods.LicensePlateStyle = (LicensePlateStyle)new Random().Next(0, 5);
@@ -156,8 +174,13 @@ namespace WarrantV
                 TickCounter = Game.GameTime;
                 string[] ID = new string[3];
                 if (Game.Player.WantedLevel > 0) WasWanted = true;
+<<<<<<< HEAD
                 if (Game.Player.WantedLevel == 0 && WasWanted) { WasWanted = false; Helpers.ClearList(true, (false, 0), true); }
                 if (Game.Player.Character.IsDead || ((Helpers.GetStat("BUSTED", true) > TimesBusted[Helpers.PlayerID()]) && TimesBusted[Helpers.PlayerID()] != -1)) Helpers.ClearList(true, (true, Helpers.PlayerID()), true);
+=======
+                if (Game.Player.WantedLevel == 0 && WasWanted) { WasWanted = false; Helpers.ClearList(true, (false,0), true); }
+                if (Game.Player.Character.IsDead || ((Helpers.GetStat("BUSTED", true) > TimesBusted[Helpers.PlayerID()]) && TimesBusted[Helpers.PlayerID()] != -1)) Helpers.ClearList(true, (true,Helpers.PlayerID()), true);
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 Ped[] peds = World.GetAllPeds(Helpers.CopModels);
                 Vehicle[] vehs = World.GetAllVehicles();
                 if (Helpers.CompareArrays(EachTick.RecognizedClothes[Helpers.PlayerID()].Item1, Helpers.GetPlayerClothes(), Config.Numeric.ClothesDifferencesToClearWarrant, true).Item1 && EachTick.WarrantLevel[Helpers.PlayerID()] != EachTick.RecognizedClothes[Helpers.PlayerID()].Item2)
@@ -300,21 +323,34 @@ namespace WarrantV
                     EachTick.VehList[VehicleIndex] = new Tuple<string[], int[]>(ID, new int[] { CacheWanted, EachTick.VehList[VehicleIndex].Item2[1] });
                 }
                 TimesBusted[Helpers.PlayerID()] = Helpers.GetStat("BUSTED", true);
+<<<<<<< HEAD
                 if (Helpers.CopsList.Count() > Config.Numeric.CopsToClearList && !EachTick.AnyCopRecog) if (!EachTick.AnyCopRecog) Helpers.ClearList(false, (false, 0), true);
             }
             if (debug)
             {
                 if (Game.Player.Character.IsInVehicle())
+=======
+                if (Helpers.CopsList.Count() > Config.Numeric.CopsToClearList&& !EachTick.AnyCopRecog) if (!EachTick.AnyCopRecog) Helpers.ClearList(false, (false,0), true);
+            }
+            if (debug)
+            {
+                if(Game.Player.Character.IsInVehicle())
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 {
                     new TextElement($" Petrol: {Game.Player.Character.CurrentVehicle.FuelLevel}/{Game.Player.Character.CurrentVehicle.PetrolTankVolume}", new PointF(50, 220), 0.5f).Draw();
 
                 }
+<<<<<<< HEAD
                 new TextElement(Helpers.JoinArrays(Helpers.GetPlayerClothes()) + " Masked:" + Helpers.Masked().ToString(), new PointF(200, 150), 0.5f).Draw();
+=======
+                new TextElement(Helpers.JoinArrays(Helpers.GetPlayerClothes())+" Masked:"+Helpers.Masked().ToString(), new PointF(200, 150), 0.5f).Draw();
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 new TextElement($"Polices: {Helpers.CopsList.Count()} Recognized Cars: {EachTick.VehList.Count()} Clothes Diffs {Helpers.CompareArrays(EachTick.RecognizedClothes[Helpers.PlayerID()].Item1, Helpers.GetPlayerClothes(), 2, true).Item2}", new PointF(50, 120), 0.5f).Draw();
                 new TextElement($"{EachTick.WarrantLevel[Helpers.PlayerID()]}", new PointF(300, 580), 0.5f).Draw();
                 new TextElement($"{EachTick.WarrantLevelVeh}", new PointF(300, 650), 0.5f).Draw();
                 new TextElement($"M:{EachTick.RecognizedClothes[0].Item2} F:{EachTick.RecognizedClothes[1].Item2} T:{EachTick.RecognizedClothes[2].Item2}", new PointF(500, 50), 0.5f).Draw();
             }
+<<<<<<< HEAD
         }
 
         private static void AbortedScript(object sender, EventArgs e)
@@ -326,6 +362,19 @@ namespace WarrantV
             }
             EachTick.LastCopsPositionBlip.Delete();
             EachTick.ChoiceMenus.ClosestPhoneBoothBlip.Delete();
+=======
+            }
+
+        private static void AbortedScript(object sender, EventArgs e)
+        {
+            if(Config.Bools.CrashAndEnterMessage)Notification.Show("Press F to WarrantsV, it crashed", true);
+                foreach (Tuple<Ped, Blip, float[], int[], Vector3> CopsList in Helpers.CopsList)
+                {
+                    CopsList.Item2.Delete();
+                }
+            EachTick.LastCopsPositionBlip.Delete();
+                EachTick.ChoiceMenus.ClosestPhoneBoothBlip.Delete();
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         }
     }
 }

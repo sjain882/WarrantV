@@ -104,7 +104,11 @@ namespace WarrantV
             }
         }
 
+<<<<<<< HEAD
         public static (bool, bool) Masked()
+=======
+        public static (bool,bool) Masked()
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         {
             bool Mask = false;
             int a = Function.Call<int>(Hash.GET_PED_PROP_INDEX, Game.Player.Character, 0);
@@ -112,16 +116,28 @@ namespace WarrantV
             int c = Function.Call<int>(Hash.GET_PED_DRAWABLE_VARIATION, Game.Player.Character, 9);
             int d = Function.Call<int>(Hash.GET_PED_DRAWABLE_VARIATION, Game.Player.Character, 6);
             int e = Function.Call<int>(Hash.GET_PED_DRAWABLE_VARIATION, Game.Player.Character, 2);//frank
+<<<<<<< HEAD
             if (PlayerID() == 2) Mask = (MasksTrev[0].Contains(a) || MasksTrev[1].Contains(b) || MasksTrev[2].Contains(c) || MasksTrev[3].Contains(d));
+=======
+            if (PlayerID() == 2) Mask= (MasksTrev[0].Contains(a) || MasksTrev[1].Contains(b) || MasksTrev[2].Contains(c) || MasksTrev[3].Contains(d));
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             if (PlayerID() == 0)
             {
                 if (MasksMichael[0].Contains(a))
                 {
+<<<<<<< HEAD
                     if (a == 11 && ((Game.Player.Character.IsInVehicle() && Game.Player.Character.CurrentVehicle.ClassType == VehicleClass.Motorcycles) || Main.LastVehType == 8)) Mask = false; else Mask = true;
                 }
                 if (MasksMichael[1].Contains(b) || MasksMichael[2].Contains(c) || MasksMichael[3].Contains(d))
                 {
                     Mask = true;
+=======
+                    if (a == 11 && ((Game.Player.Character.IsInVehicle() && Game.Player.Character.CurrentVehicle.ClassType == VehicleClass.Motorcycles)||Main.LastVehType==8)) Mask= false; else Mask= true;
+                }
+                if(MasksMichael[1].Contains(b) || MasksMichael[2].Contains(c) || MasksMichael[3].Contains(d))
+                {
+                    Mask= true;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 }
             }
             if (PlayerID() == 1) Mask = (MasksFrank[0].Contains(a) || MasksFrank[1].Contains(b) || MasksFrank[2].Contains(c) || MasksFrank[2].Contains(e));
@@ -130,8 +146,13 @@ namespace WarrantV
 
         public static string JoinArrays(Array ar)
         {
+<<<<<<< HEAD
             string output = "";
             foreach (int s in ar)
+=======
+            string output="";
+            foreach(int s in ar)
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             {
                 output += $" {s.ToString()}";
             }
@@ -267,7 +288,11 @@ namespace WarrantV
         {
             //Blip playerBlip = Function.Call<Blip>(Hash.GET_MAIN_PLAYER_BLIP_ID);
             return (!Function.Call<bool>(Hash.ARE_PLAYER_STARS_GREYED_OUT, Game.Player));
+<<<<<<< HEAD
             //return !(playerBlip.Color.ToString() == "GreyDark");
+=======
+                //return !(playerBlip.Color.ToString() == "GreyDark");
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         }
 
 
@@ -283,7 +308,11 @@ namespace WarrantV
                 }
                 saveString += clothes.Item2 + "|" + EachTick.StarsEvaded[PlayerID()] + "|" + Environment.NewLine;
             }
+<<<<<<< HEAD
             saveString += Main.Plates[0] + "|" + Main.Plates[1] + "|" + Main.Plates[2] + Environment.NewLine;
+=======
+            saveString += Main.Plates[0] + "|" + Main.Plates[1] + "|" + Main.Plates[2]+Environment.NewLine;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             foreach (Tuple<string[], int[]> Car in EachTick.VehList)
             {
                 saveString += Car.Item1[0] + "|";
@@ -294,7 +323,11 @@ namespace WarrantV
                 saveString += Environment.NewLine;
             }
             File.WriteAllText(SaveFile, saveString);
+<<<<<<< HEAD
             if (Config.Bools.CrashAndEnterMessage) GTA.UI.Notification.Show(Config.Strings.WarrantsVSaved);//"WarrantsV Saved"
+=======
+            if(Config.Bools.CrashAndEnterMessage)GTA.UI.Notification.Show(Config.Strings.WarrantsVSaved);//"WarrantsV Saved"
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         }
         public static void Load()
         {
@@ -306,7 +339,11 @@ namespace WarrantV
                 File.WriteAllBytes(".\\scripts\\Okoniewitz\\WarrantsV\\Wanted2.png", ImageToByte(Properties.Resources.Wanted2));
                 File.WriteAllBytes(".\\scripts\\Okoniewitz\\WarrantsV\\NearWanted.png", ImageToByte(Properties.Resources.NearWanted));
                 File.WriteAllBytes(".\\scripts\\Okoniewitz\\WarrantsV\\Masked.png", ImageToByte(Properties.Resources.Masked));
+<<<<<<< HEAD
                 if (Main.debug) File.WriteAllBytes(".\\scripts\\Okoniewitz\\WarrantsV\\WantedTemplate.xcf", Properties.Resources.WantedTemplate);
+=======
+                if(Main.debug) File.WriteAllBytes(".\\scripts\\Okoniewitz\\WarrantsV\\WantedTemplate.xcf", Properties.Resources.WantedTemplate);
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             }
             string SaveFile = ".\\scripts\\Okoniewitz\\WarrantsV\\Save.ini";
             if (!File.Exists(SaveFile) || File.ReadAllLines(SaveFile).Length == 0) Save();
@@ -328,9 +365,15 @@ namespace WarrantV
 
             string PlatesString = SaveStrings[3];
             Main.Plates[0] = int.Parse(PlatesString.Substring(0, PlatesString.IndexOf("|")));
+<<<<<<< HEAD
             PlatesString = PlatesString.Substring(PlatesString.IndexOf("|") + 1);
             Main.Plates[1] = int.Parse(PlatesString.Substring(0, PlatesString.IndexOf("|")));
             PlatesString = PlatesString.Substring(PlatesString.IndexOf("|") + 1);
+=======
+            PlatesString = PlatesString.Substring(PlatesString.IndexOf("|")+1);
+            Main.Plates[1] = int.Parse(PlatesString.Substring(0, PlatesString.IndexOf("|")));
+            PlatesString = PlatesString.Substring(PlatesString.IndexOf("|")+1);
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             Main.Plates[2] = int.Parse(PlatesString);
 
             EachTick.VehList.Clear();
@@ -377,7 +420,11 @@ namespace WarrantV
         public static float RecognitionAdd(Ped byWhom)
         {
             float distance = byWhom.Position.DistanceTo(Game.Player.Character.Position);
+<<<<<<< HEAD
             float runnig = 0, rainy = 0, facing = 0, incar = 0, knownClothes = 0, night = 0, armor = 0;
+=======
+            float runnig = 0, rainy = 0, facing = 0, incar = 0, knownClothes = 0, night = 0,armor=0;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             if (Game.Player.Character.IsSprinting)
             {
                 runnig = Config.Numeric.RecognitionAddSprint;
@@ -400,7 +447,11 @@ namespace WarrantV
             if (World.CurrentTimeOfDay >= TimeSpan.FromHours(22) || World.CurrentTimeOfDay < TimeSpan.FromHours(5)) night = Config.Numeric.RecognitionAddNight;
             if (Game.Player.Character.IsInVehicle())
             {
+<<<<<<< HEAD
                 if (!Function.Call<bool>(Hash.IS_PED_FACING_PED, Game.Player.Character, byWhom, 110f) && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.Boats && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.Cycles && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.Motorcycles && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.OffRoad) return 0;
+=======
+                if (!Function.Call<bool>(Hash.IS_PED_FACING_PED, Game.Player.Character, byWhom, 110f)&&Game.Player.Character.CurrentVehicle.ClassType!= VehicleClass.Boats && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.Cycles && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.Motorcycles && Game.Player.Character.CurrentVehicle.ClassType != VehicleClass.OffRoad) return 0;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 if (EachTick.WarrantLevel[1] > 0)
                 {
                     incar = Config.Numeric.RecognitionAddInWantedCar;
@@ -418,7 +469,11 @@ namespace WarrantV
 
             if (Config.Bools.NotUselessArmorCompability)
             {
+<<<<<<< HEAD
                 if (Game.Player.WantedLevel == 0 && EachTick.WarrantLevel[PlayerID()] <= 1)
+=======
+                if (Game.Player.WantedLevel==0 && EachTick.WarrantLevel[PlayerID()]<=1)
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 {
                     switch (PlayerID())
                     {
@@ -449,7 +504,11 @@ namespace WarrantV
                 facing = Config.Numeric.RecognitionAddVisibleFace;
             }
             else facing = Config.Numeric.RecognitionAddNotVisibleFace;
+<<<<<<< HEAD
             float nb = ((runnig + rainy + knownClothes + night + armor + facing + incar + (EachTick.WarrantLevel[PlayerID()] * Config.Numeric.RecognitionAddWarrantMultip) + Config.Numeric.RecognitionAddBase) * Config.Numeric.RecognitionAddMultip / (distance * Config.Numeric.RecognitionAddDistMultip)) / Config.Numeric.RecognitionAddDivider;
+=======
+            float nb = ((runnig + rainy + knownClothes + night +armor + facing + incar + (EachTick.WarrantLevel[PlayerID()] * Config.Numeric.RecognitionAddWarrantMultip) +Config.Numeric.RecognitionAddBase) * Config.Numeric.RecognitionAddMultip / (distance * Config.Numeric.RecognitionAddDistMultip)) / Config.Numeric.RecognitionAddDivider;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             if (nb > 0) return nb; else return 0;
         }
         public static float RecognitionAddCar(Ped byWhom)
@@ -468,7 +527,11 @@ namespace WarrantV
                     if (Game.Player.Character.CurrentVehicle.Mods.LicensePlateType == LicensePlateType.FrontPlate && Function.Call<bool>(Hash.IS_PED_FACING_PED, Game.Player.Character, byWhom, 35f))
                     {
                         facing = Config.Numeric.VehRecognitionAddVisiblePlate;
+<<<<<<< HEAD
                         if (Main.debug) new GTA.UI.TextElement("Facing", new PointF(0, 0), 0.8f).Draw();
+=======
+                        if (Main.debug) new GTA.UI.TextElement("Facing", new PointF(0,0),0.8f).Draw();
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                     }
 
                     if (Game.Player.Character.CurrentVehicle.Mods.LicensePlateType == LicensePlateType.RearPlate && !Function.Call<bool>(Hash.IS_PED_FACING_PED, Game.Player.Character, byWhom, 145f))
@@ -547,7 +610,11 @@ namespace WarrantV
         {
             return Function.Call<int>(Hash.GET_HASH_KEY, value);
         }
+<<<<<<< HEAD
         public static void ClearList(bool ResetRecognition, (bool, int) RemoveWarrants, bool RemoveCopsList)
+=======
+        public static void ClearList(bool ResetRecognition, (bool,int) RemoveWarrants, bool RemoveCopsList)
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
         {
             if (RemoveWarrants.Item1)
             {
@@ -594,7 +661,11 @@ namespace WarrantV
                 }
                 else
                 {
+<<<<<<< HEAD
                     return (Who.Position.DistanceTo(byWhom.Position) < MaxDist && Function.Call<bool>(Hash.HAS_ENTITY_CLEAR_LOS_TO_ENTITY, byWhom, Who, 17) && (Function.Call<bool>(Hash.IS_PED_FACING_PED, byWhom, Who, InVehFov) || (Function.Call<bool>(Hash.IS_PED_FACING_PED, byWhom, Who, 360) && Who.Position.DistanceTo(byWhom.Position) < 3)));
+=======
+                    return (Who.Position.DistanceTo(byWhom.Position) < MaxDist && Function.Call<bool>(Hash.HAS_ENTITY_CLEAR_LOS_TO_ENTITY, byWhom, Who, 17) && (Function.Call<bool>(Hash.IS_PED_FACING_PED, byWhom, Who, InVehFov)|| (Function.Call<bool>(Hash.IS_PED_FACING_PED, byWhom, Who, 360) &&Who.Position.DistanceTo(byWhom.Position)<3)));
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 }
             }
             else return false;

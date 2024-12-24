@@ -69,16 +69,26 @@ namespace WarrantV
             public static bool MaskNerf = true;
             public static bool WantedNearCar = true;
             public static bool IVChases = true;
+<<<<<<< HEAD
             public static bool PlateChanging = true;
         }
         public static class Numeric
         {
             public static int RememberNewClothesWhenAlmostRecognizedNumber = 70;
+=======
+        }
+        public static class Numeric
+        {
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             public static int ClothesDifferencesToClearWarrant = 3;
             public static int CopsToClearList = 30;
             public static int ScreenEffectID = 12;
             public static int RandomWantedCarChance = 3;
+<<<<<<< HEAD
             public static float WantedNearCarMaxDist = 12f;
+=======
+            public static float WantedNearCarMaxDist=12f;
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
 
             public static float CopsFOV = 110f;
             public static float CopsFOVinVeh = 110f;
@@ -195,7 +205,10 @@ namespace WarrantV
                 "MaskNerf = true",
                 "WantedNearCar = true",
                 "IVChases = true",
+<<<<<<< HEAD
                 "PlateChanging = true",
+=======
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 "",
                 "[KEYBINDS]",
                 "OpenMenuKey = Keys.E",
@@ -206,11 +219,15 @@ namespace WarrantV
                 "PlateChange = Keys.E",
                 "",
                 "[SETTINGS]",
+<<<<<<< HEAD
                 "RememberNewClothesWhenAlmostRecognizedNumber = 70",
+=======
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 "ClothesDifferencesToClearWarrant = 3",
                 "CopsToClearList = 30",
                 "ScreenEffectID = 12",
                 "RandomWantedCarChance = 3",
+<<<<<<< HEAD
                 "WantedNearCarMaxDist = 12f",
                 "",
                 "CopsFOV = 110f",
@@ -221,6 +238,18 @@ namespace WarrantV
                 "NerfSpeed = 0,8f",
                 "NoNerfRegen = 1f",
                 "NoNerfSpeed = 1f",
+=======
+                "WantedNearCarMaxDist = 12",
+                "",
+                "CopsFOV = 110",
+                "CopsFOVinVeh = 110",
+                "CopsVisibleDistance = 50",
+                "",
+                "NerfRegen = 0,4",
+                "NerfSpeed = 0,8",
+                "NoNerfRegen = 1",
+                "NoNerfSpeed = 1",
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 "",
                 "TimeToLoseInterest = 9000",
                 "TimeToForgetFace = 3000",
@@ -231,12 +260,21 @@ namespace WarrantV
                 "AddedRandomTimeToCallMin = 3",
                 "AddedRandomTimeToCallMax = 6",
                 "CallTime = 5000",
+<<<<<<< HEAD
                 "MinDistToCall = 15f",
                 "",
                 "PhoneBlipSrpite = 458",
                 "PhoneBlipColor = 0",
                 "PhoneBlipScale = 0,9f",
                 "PhoneBlipDisplayDist = 50f",
+=======
+                "MinDistToCall = 15",
+                "",
+                "PhoneBlipSrpite = 458",
+                "PhoneBlipColor = 0",
+                "PhoneBlipScale = 0,9",
+                "PhoneBlipDisplayDist = 50",
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 "",
                 "PlatePrice = 500",
                 "PlateMaxNum = 5",
@@ -248,6 +286,7 @@ namespace WarrantV
                 "PlayerPosterHeight = 580",
                 "CarPosterHeight = 650",
                 "",
+<<<<<<< HEAD
                 "CopBlipScale = 0,6f",
                 "CopBlipVehScale = 0,9f",
                 "",
@@ -279,6 +318,39 @@ namespace WarrantV
                 "VehRecognitionAddMultip = 3f",
                 "VehRecognitionAddDistMultip = 1,7f",
                 "VehRecognitionAddDivider = 2f",
+=======
+                "CopBlipScale = 0,6",
+                "CopBlipVehScale = 0,9",
+                "",
+                "RecognitionAddSprint = -12",
+                "RecognitionAddRun = -12",
+                "RecognitionAddPerKnownClothes = 12",
+                "RecognitionAddBadWeather = -15",
+                "RecognitionAddNight = -10",
+                "RecognitionAddInWantedCar = 8",
+                "RecognitionAddInCar = -10",
+                "RecognitionAddInCarSneaking = -20",
+                "RecognitionAddVisibleFaceMaxDist = 30",
+                "RecognitionAddVisibleFace = 15",
+                "RecognitionAddNotVisibleFace = -10",
+                "RecognitionAddBase = 40",
+                "RecognitionAddWarrantMultip = 5",
+                "RecognitionAddMultip = 3",
+                "RecognitionAddDistMultip = 1,6",
+                "RecognitionAddDivider = 3f",
+                "RecognitionAddArmor = 15",
+                "",
+                "VehRecognitionAddBadWeather = -7",
+                "VehRecognitionAddNight = -7",
+                "VehRecognitionAddVisiblePlateMaxDist = 30",
+                "VehRecognitionAddVisiblePlate = 15",
+                "VehRecognitionAddSpeedDivider = 2",
+                "VehRecognitionAddWarrantMultip = 5",
+                "VehRecognitionAddBase = 40",
+                "VehRecognitionAddMultip = 3",
+                "VehRecognitionAddDistMultip = 1,7",
+                "VehRecognitionAddDivider = 2",
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 "",
                 "ArmorMichaelComponentID = 8",
                 "ArmorMichaelDrawableID = 17",
@@ -303,7 +375,11 @@ namespace WarrantV
                 "PhoneToBribeCopsTrevor = \"to bribe cops for T\"",
                 "PlateChange = \"Press ~INPUT_PICKUP~ to change license plate.\"",
                 "PlateNoMore = \"You dont have any license plates.\"",
+<<<<<<< HEAD
                 "PlateBuy = \"Press ~INPUT_PICKUP~ to buy plate for\"",
+=======
+                "PlateBuy = \"Press ~INPUT_PICKUP~ to buy plate for",
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
                 "PlateBuyInfo = \"You have\"",
                 "PlateBuyInfo2 = \"plates.\"",
                 "PlateNoMoney = \"You dont have enough money.\"",
@@ -374,7 +450,10 @@ namespace WarrantV
             Config.Bools.MaskNerf = ConfigFile.GetValue<bool>("FEATURES", "MaskNerf", true);
             Config.Bools.WantedNearCar = ConfigFile.GetValue<bool>("FEATURES", "WantedNearCar", true);
             Config.Bools.IVChases = ConfigFile.GetValue<bool>("FEATURES", "IVChases", true);
+<<<<<<< HEAD
             Config.Bools.PlateChanging = ConfigFile.GetValue<bool>("FEATURES", "PlateChanging", true);
+=======
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             #endregion;
             #region Binds;
             Config.ETC.OpenMenuKey = ConfigFile.GetValue<Keys>("KEYBINDS", "OpenMenuKey", Keys.E);
@@ -385,7 +464,10 @@ namespace WarrantV
             Config.ETC.PlateChange = ConfigFile.GetValue<Keys>("KEYBINDS", "PlateChange", Keys.E);
             #endregion;
             #region Numeric;
+<<<<<<< HEAD
             Config.Numeric.RememberNewClothesWhenAlmostRecognizedNumber = ConfigFile.GetValue<int>("SETTINGS", "RememberNewClothesWhenAlmostRecognizedNumber", 70);
+=======
+>>>>>>> 851ec09bf4e1c68b8946429376b8fd9d4fdf8580
             Config.Numeric.ClothesDifferencesToClearWarrant = ConfigFile.GetValue<int>("SETTINGS", "ClothesDifferencesToClearWarrant", 3);
             Config.Numeric.CopsToClearList = ConfigFile.GetValue<int>("SETTINGS", "CopsToClearList", 30);
             Config.Numeric.ScreenEffectID = ConfigFile.GetValue<int>("SETTINGS", "ScreenEffectID", 12);
