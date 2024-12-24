@@ -70,6 +70,7 @@ namespace WarrantV
             public static bool WantedNearCar = true;
             public static bool IVChases = true;
             public static bool PlateChanging = true;
+            public static bool ExtraBlipIndicators = true;
         }
         public static class Numeric
         {
@@ -196,6 +197,7 @@ namespace WarrantV
                 "WantedNearCar = true",
                 "IVChases = true",
                 "PlateChanging = true",
+                "ExtraBlipIndicators = true",
                 "",
                 "[KEYBINDS]",
                 "OpenMenuKey = Keys.E",
@@ -375,6 +377,7 @@ namespace WarrantV
             Config.Bools.WantedNearCar = ConfigFile.GetValue<bool>("FEATURES", "WantedNearCar", true);
             Config.Bools.IVChases = ConfigFile.GetValue<bool>("FEATURES", "IVChases", true);
             Config.Bools.PlateChanging = ConfigFile.GetValue<bool>("FEATURES", "PlateChanging", true);
+            Config.Bools.ExtraBlipIndicators = ConfigFile.GetValue<bool>("FEATURES", "ExtraBlipIndicators", true);
             #endregion;
             #region Binds;
             Config.ETC.OpenMenuKey = ConfigFile.GetValue<Keys>("KEYBINDS", "OpenMenuKey", Keys.E);
