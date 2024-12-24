@@ -204,7 +204,7 @@ namespace WarrantV
             {
                 if (Game.Player.WantedLevel > 0)
                 {
-                    if (LastCopsPositionBlipTimer < Game.GameTime)
+                    if (LastCopsPositionBlipTimer < Game.GameTime) //radius is switching blue and red each 500ms
                     {
                         LastCopsPositionBlipTimer = Game.GameTime + 500;
                         if (LastCopsPositionBlip != null && LastCopsPositionBlip.Exists())
@@ -212,7 +212,7 @@ namespace WarrantV
                             if (LastCopsPositionBlip.Color == BlipColor.Red) LastCopsPositionBlip.Color = BlipColor.Blue; else LastCopsPositionBlip.Color = BlipColor.Red;
                         }
                     }
-                    if (!Function.Call<bool>(Hash.ARE_PLAYER_STARS_GREYED_OUT, Game.Player))
+                    if (!Function.Call<bool>(Hash.ARE_PLAYER_STARS_GREYED_OUT, Game.Player)) //currently seen by police
                     {
                         LastCopsPosition = Game.Player.Character.Position;
                         CopsLostTimer = 0;
@@ -222,11 +222,11 @@ namespace WarrantV
                     {
                         if (!(LastCopsPositionBlip != null && LastCopsPositionBlip.Exists()))
                         {
-                            LastCopsPositionBlip = World.CreateBlip(LastCopsPosition, Game.Player.WantedLevel * 100f + 50f);
+                            LastCopsPositionBlip = World.CreateBlip(LastCopsPosition, Game.Player.WantedLevel * 150f + 50f);
                             LastCopsPositionBlip.Color = BlipColor.Red;
                             LastCopsPositionBlip.Alpha = 50;
                         }
-                        if (Game.Player.Character.Position.DistanceTo(LastCopsPosition) >= Game.Player.WantedLevel * 100f + 50f)
+                        if (Game.Player.Character.Position.DistanceTo(LastCopsPosition) >= Game.Player.WantedLevel * 150f + 50f)
                         {
                             if (CopsLostTimer == 0) CopsLostTimer = Game.GameTime + 3000 * (Game.Player.WantedLevel * 1);
                             if (CopsLostTimer < Game.GameTime) Game.Player.WantedLevel = 0;
@@ -254,6 +254,7 @@ namespace WarrantV
             public static int HelpMessagePhoneDelay, HelpMessageSellerDelay;
             public static Vehicle ClosestVeh;
 
+            public static int PhonePickupDelay;
             public static void Phones(object sender, EventArgs e)
             {
                 ClosestPhone = World.GetClosestProp(Game.Player.Character.Position, Config.Numeric.PhoneBlipDisplayDist, Helpers.PhoneModelsList);
@@ -277,7 +278,7 @@ namespace WarrantV
                         Screen.ShowHelpTextThisFrame(Config.Strings.PhoneNoMoney);//$"You dont have enough money."
                     }
 
-                    if (bribing)
+                    if (bribing && Game.GameTime> PhonePickupDelay)
                     {
                         Game.Player.SetControlState(false, SetPlayerControlFlags.LeaveCameraControlOn);
                         string bribeText = Config.Strings.PhoneLeave;//$"Press ~INPUT_PICKUP~ to leave the telephone"
@@ -311,7 +312,11 @@ namespace WarrantV
                             if (Game.IsKeyPressed(System.Windows.Forms.Keys.E) && Game.GameTime >= -(HelpMessagePhoneDelay))
                             {
                                 bribing = true;
-                                Game.Player.Character.Task.AchieveHeading(ClosestPhone.Rotation.Z);
+                                PhonePickupDelay = Game.GameTime + 1100;
+                                Vector3 phoneFront = ClosestPhone.Position + ClosestPhone.ForwardVector * (-0.7f);
+                                Game.Player.Character.Task.GoStraightTo(new Vector3(phoneFront.X,phoneFront.Y,Game.Player.Character.Position.Z),1000,PedMoveBlendRatio.Walk,ClosestPhone.Heading, 0.3f);
+                                //Game.Player.Character.Task.AchieveHeading(ClosestPhone.Rotation.Z);
+                                //Game.Player.Character.Task.LookAt(ClosestPhone);
                             }
                             if ((HelpMessagePhoneDelay <= 0 && Game.GameTime >= -(HelpMessagePhoneDelay)) || (HelpMessagePhoneDelay > 0 && Game.GameTime >= HelpMessagePhoneDelay)) Screen.ShowHelpTextThisFrame(Config.Strings.PhoneUse);//"Press ~INPUT_PICKUP~ to use the telephone.
                         }
