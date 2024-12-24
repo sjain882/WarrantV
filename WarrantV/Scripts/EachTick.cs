@@ -306,7 +306,13 @@ namespace WarrantV
                     {
                         if (!Helpers.ObjectBroken(ClosestPhone))
                         {
-                            if (Game.IsKeyPressed(System.Windows.Forms.Keys.E) && Game.GameTime >= -(HelpMessagePhoneDelay)) bribing = true;
+                            Screen.ShowSubtitle($"player: {Game.Player.Character.Rotation} phone: {ClosestPhone.Rotation}");
+
+                            if (Game.IsKeyPressed(System.Windows.Forms.Keys.E) && Game.GameTime >= -(HelpMessagePhoneDelay))
+                            {
+                                bribing = true;
+                                Game.Player.Character.Task.AchieveHeading(ClosestPhone.Rotation.Z);
+                            }
                             if ((HelpMessagePhoneDelay <= 0 && Game.GameTime >= -(HelpMessagePhoneDelay)) || (HelpMessagePhoneDelay > 0 && Game.GameTime >= HelpMessagePhoneDelay)) Screen.ShowHelpTextThisFrame(Config.Strings.PhoneUse);//"Press ~INPUT_PICKUP~ to use the telephone.
                         }
                         else if ((HelpMessagePhoneDelay <= 0 && Game.GameTime >= -(HelpMessagePhoneDelay)) || (HelpMessagePhoneDelay > 0 && Game.GameTime >= HelpMessagePhoneDelay)) Screen.ShowHelpTextThisFrame(Config.Strings.PhoneBroken);//"This phone is broken."
