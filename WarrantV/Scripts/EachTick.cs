@@ -222,13 +222,13 @@ namespace WarrantV
                     {
                         if (!(LastCopsPositionBlip != null && LastCopsPositionBlip.Exists()))
                         {
-                            LastCopsPositionBlip = World.CreateBlip(LastCopsPosition, Game.Player.WantedLevel * 100 + 50);
+                            LastCopsPositionBlip = World.CreateBlip(LastCopsPosition, Game.Player.WantedLevel * 100f + 50f);
                             LastCopsPositionBlip.Color = BlipColor.Red;
                             LastCopsPositionBlip.Alpha = 50;
                         }
-                        if (Game.Player.Character.Position.DistanceTo(LastCopsPosition) > Game.Player.WantedLevel * 100 + 51)
+                        if (Game.Player.Character.Position.DistanceTo(LastCopsPosition) >= Game.Player.WantedLevel * 100f + 50f)
                         {
-                            if (CopsLostTimer == 0) CopsLostTimer = Game.GameTime + 8000 * (Game.Player.WantedLevel * 2);
+                            if (CopsLostTimer == 0) CopsLostTimer = Game.GameTime + 3000 * (Game.Player.WantedLevel * 1);
                             if (CopsLostTimer < Game.GameTime) Game.Player.WantedLevel = 0;
                         }
                         else
