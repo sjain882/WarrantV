@@ -52,7 +52,7 @@ namespace WarrantV
                 if (Game.IsKeyPressed(Config.ETC.OpenMenuKey))
                 {
                     EachTick.ChoiceMenus.bribing = false;
-                    Game.Player.CanControlCharacter = true;
+                    Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
                     EachTick.ChoiceMenus.HelpMessagePhoneDelay = -(Game.GameTime + 200);
 
                     return;
@@ -62,14 +62,14 @@ namespace WarrantV
                     if (Game.Player.Money >= 300 * Math.Pow(EachTick.RecognizedClothes[0].Item2, 2) + 100)
                     {
                         EachTick.ChoiceMenus.bribing = false;
-                        Game.Player.CanControlCharacter = true;
+                        Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
                         Game.Player.Money -= (int)(300 * Math.Pow(EachTick.RecognizedClothes[0].Item2, 2) + 100);
                         Helpers.ClearList(true, (true, 0), true);
                     }
                     else
                     {
                         EachTick.ChoiceMenus.bribing = false;
-                        Game.Player.CanControlCharacter = true;
+                        Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
                         EachTick.ChoiceMenus.HelpMessagePhoneDelay = Game.GameTime + 2500;
                     }
                 }
@@ -79,14 +79,14 @@ namespace WarrantV
                     if (Game.Player.Money >= 300 * Math.Pow(EachTick.RecognizedClothes[1].Item2, 2) + 100)
                     {
                         EachTick.ChoiceMenus.bribing = false;
-                        Game.Player.CanControlCharacter = true;
+                        Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
                         Game.Player.Money -= (int)(300 * Math.Pow(EachTick.RecognizedClothes[1].Item2, 2) + 100);
                         Helpers.ClearList(true, (true, 1), true);
                     }
                     else
                     {
                         EachTick.ChoiceMenus.bribing = false;
-                        Game.Player.CanControlCharacter = true;
+                        Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
                         EachTick.ChoiceMenus.HelpMessagePhoneDelay = Game.GameTime + 2500;
                     }
                 }
@@ -95,14 +95,14 @@ namespace WarrantV
                     if (Game.Player.Money >= 300 * Math.Pow(EachTick.RecognizedClothes[2].Item2, 2) + 100)
                     {
                         EachTick.ChoiceMenus.bribing = false;
-                        Game.Player.CanControlCharacter = true;
+                        Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
                         Game.Player.Money -= (int)(300 * Math.Pow(EachTick.RecognizedClothes[2].Item2, 2) + 100);
                         Helpers.ClearList(true, (true, 2), true);
                     }
                     else
                     {
                         EachTick.ChoiceMenus.bribing = false;
-                        Game.Player.CanControlCharacter = true;
+                        Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
                         EachTick.ChoiceMenus.HelpMessagePhoneDelay = Game.GameTime + 2500;
                     }
                 }
@@ -215,7 +215,7 @@ namespace WarrantV
                         if (EachTick.VehList.Any(c => c.Item1.SequenceEqual(ID)))
                         {
                             vehID = EachTick.VehList.FindIndex(c => c.Item1.SequenceEqual(ID));
-                            if (lastCar.Position.DistanceTo(Game.Player.Character.Position) < Config.Numeric.WantedNearCarMaxDist && EachTick.VehList[vehID].Item2[0] > 0 && Game.Player.WantedLevel == 0 && EachTick.WarrantLevel[Helpers.PlayerID()] == 0 && !Game.Player.Character.IsGettingIntoVehicle)
+                            if (lastCar.Position.DistanceTo(Game.Player.Character.Position) < Config.Numeric.WantedNearCarMaxDist && EachTick.VehList[vehID].Item2[0] > 0 && Game.Player.WantedLevel == 0 && EachTick.WarrantLevel[Helpers.PlayerID()] == 0 && !Game.Player.Character.IsEnteringVehicle)
                             {
                                 OverrideMasked = true;
                             }
