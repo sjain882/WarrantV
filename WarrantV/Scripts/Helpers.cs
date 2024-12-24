@@ -174,7 +174,21 @@ namespace WarrantV
             blip.IsShortRange = false;
             blip.ShowsCrewIndicator = false;
             blip.ShowsFriendIndicator = false;
-            blip.SecondaryColor = Color.LightGreen;
+            switch(PlayerID())
+            {
+                case 0:
+                    blip.SecondaryColor = Color.FromArgb(255, 109,184,215);
+                    break;
+                case 1:
+                    blip.SecondaryColor = Color.FromArgb(255, 176,238,175);
+                    break;
+                case 2:
+                    blip.SecondaryColor = Color.FromArgb(255,255,167,95);
+                    break;
+                default:
+                    blip.SecondaryColor = Color.White;
+                    break;
+            }
             if (CopState(cop) == Config.Strings.CopStateHeli)
             {
                 if (blip.Sprite != BlipSprite.HelicopterAnimated) blip.Sprite = BlipSprite.HelicopterAnimated;
