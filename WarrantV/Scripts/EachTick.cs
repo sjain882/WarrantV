@@ -25,7 +25,7 @@ namespace WarrantV
         {
             if (!Helpers.CopsList.Any(c => c.Item1 == cop))
             {
-                Helpers.CopsList.Add(new Tuple<Ped, Blip, float[], int[], Vector3>(cop, cop.AddBlip(), new float[2], new int[2], new Vector3()));
+                Helpers.CopsList.Add(new Tuple<Ped, Blip, float[], int[], Vector3>(cop, cop.AddBlip(), new float[2], new int[3], new Vector3()));
             }
             int Index = Helpers.CopsList.FindIndex(c => c.Item1 == cop);
             Blip CopBlip = Helpers.CopsList[Index].Item2;
@@ -33,9 +33,11 @@ namespace WarrantV
             int LastSeen = Helpers.CopsList[Index].Item4[0];
             int CallDelay = Helpers.CopsList[Index].Item4[1];
             Vector3 LastSeenPos = Helpers.CopsList[Index].Item5;
+            int TaskType = Helpers.CopsList[Index].Item4[2];
+            int NewTaskType = 0;
             if (Recognition[0] > 10 || Recognition[1] > 10) AnyCopRecog = true;
             if (!cop.IsAlive) { Recognition[0] = 0; Recognition[1] = 0; goto SavePed; }
-            Helpers.BlipHandle(cop, CopBlip, new float[] { Recognition[0], Recognition[1] }, LastSeenPos, Helpers.Visible(Game.Player.Character, cop, Config.Numeric.CopsFOV, Config.Numeric.CopsVisibleDistance, Config.Numeric.CopsFOVinVeh));
+            NewTaskType = Helpers.BlipHandle(cop, CopBlip, new float[] { Recognition[0], Recognition[1] }, TaskType, LastSeenPos, Helpers.Visible(Game.Player.Character, cop, Config.Numeric.CopsFOV, Config.Numeric.CopsVisibleDistance, Config.Numeric.CopsFOVinVeh));
             {
                 if ((Helpers.CopsList.Count > 15 && (Main.Even && Index % 2 == 0) || (!Main.Even && Index % 2 == 1)) || Helpers.CopsList.Count <= 15)
                 {
@@ -43,6 +45,7 @@ namespace WarrantV
                     {
                         LastSeen = Game.GameTime + Config.Numeric.TimeToLoseInterest;
                         LastSeenPos = Game.Player.Character.Position;
+                        NewTaskType = 0;
                         if (Helpers.CompareArrays(RecognizedClothes[Helpers.PlayerID()].Item1, Helpers.GetPlayerClothes(), Config.Numeric.ClothesDifferencesToClearWarrant, true).Item1 && ((Recognition[0] > Config.Numeric.RememberNewClothesWhenAlmostRecognizedNumber && !Helpers.Masked().Item1) || (Game.Player.WantedLevel > 0 && Recognized[0]))) RecognizedClothes[Helpers.PlayerID()] = (Helpers.GetPlayerClothes(), RecognizedClothes[Helpers.PlayerID()].Item2); //when recognized > x remember new clothes
                         if (WarrantLevel[Helpers.PlayerID()] > 0 || WarrantLevelVeh > 0 || Game.Player.WantedLevel > 0 || Helpers.Masked().Item1)
                         {
@@ -173,7 +176,7 @@ namespace WarrantV
         SavePed:
             if (Helpers.Masked().Item1 && !Config.Bools.WantedWhenMasked) Recognition[0] = 0;
 
-            Helpers.CopsList[Index] = new Tuple<Ped, Blip, float[], int[], Vector3>(cop, CopBlip, new float[] { Recognition[0], Recognition[1] }, new int[] { LastSeen, CallDelay }, LastSeenPos);
+            Helpers.CopsList[Index] = new Tuple<Ped, Blip, float[], int[], Vector3>(cop, CopBlip, new float[] { Recognition[0], Recognition[1] }, new int[] { LastSeen, CallDelay, NewTaskType }, LastSeenPos);
         }
 
         public static void MaskNerf(object sender, EventArgs e)

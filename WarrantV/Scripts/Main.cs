@@ -49,7 +49,7 @@ namespace WarrantV
         {
             if (EachTick.ChoiceMenus.bribing)
             {
-                if (Game.IsKeyPressed(Config.ETC.OpenMenuKey))
+                if (Game.IsKeyPressed(Config.ETC.OpenMenuKey) || Game.IsControlJustPressed(Control.Talk))
                 {
                     EachTick.ChoiceMenus.bribing = false;
                     Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
@@ -57,7 +57,7 @@ namespace WarrantV
 
                     return;
                 }
-                if (Game.IsKeyPressed(Config.ETC.MichaelMenuKey) && EachTick.RecognizedClothes[0].Item2 > 0)
+                if ((Game.IsKeyPressed(Config.ETC.MichaelMenuKey) || Game.IsControlJustPressed(Control.PhoneLeft)) && EachTick.RecognizedClothes[0].Item2 > 0)
                 {
                     if (Game.Player.Money >= 300 * Math.Pow(EachTick.RecognizedClothes[0].Item2, 2) + 100)
                     {
@@ -74,7 +74,7 @@ namespace WarrantV
                     }
                 }
 
-                if (Game.IsKeyPressed(Config.ETC.FranklinMenuKey) && EachTick.RecognizedClothes[1].Item2 > 0)
+                if ((Game.IsKeyPressed(Config.ETC.FranklinMenuKey) || Game.IsControlJustPressed(Control.PhoneUp)) && EachTick.RecognizedClothes[1].Item2 > 0)
                 {
                     if (Game.Player.Money >= 300 * Math.Pow(EachTick.RecognizedClothes[1].Item2, 2) + 100)
                     {
@@ -90,7 +90,7 @@ namespace WarrantV
                         EachTick.ChoiceMenus.HelpMessagePhoneDelay = Game.GameTime + 2500;
                     }
                 }
-                if (Game.IsKeyPressed(Config.ETC.TrevorMenuKey) && EachTick.RecognizedClothes[2].Item2 > 0)
+                if ((Game.IsKeyPressed(Config.ETC.TrevorMenuKey) || Game.IsControlJustPressed(Control.PhoneRight)) && EachTick.RecognizedClothes[2].Item2 > 0)
                 {
                     if (Game.Player.Money >= 300 * Math.Pow(EachTick.RecognizedClothes[2].Item2, 2) + 100)
                     {
@@ -109,7 +109,7 @@ namespace WarrantV
             }
             if (EachTick.ChoiceMenus.buying && Config.Bools.PlateChanging)
             {
-                if (Game.IsKeyPressed(Config.ETC.PlateBuyKey))
+                if (Game.IsKeyPressed(Config.ETC.PlateBuyKey) || Game.IsControlJustPressed(Control.Talk))
                 {
                     if (Plates[Helpers.PlayerID()] < Config.Numeric.PlateMaxNum)
                     {
@@ -125,7 +125,7 @@ namespace WarrantV
             }
             if (EachTick.ChoiceMenus.PlateChangeAble && Config.Bools.PlateChanging)
             {
-                if (Game.IsKeyPressed(Config.ETC.PlateChange))
+                if (Game.IsKeyPressed(Config.ETC.PlateChange) || Game.IsControlJustPressed(Control.Talk))
                 {
                     Plates[Helpers.PlayerID()]--;
                     EachTick.ChoiceMenus.ClosestVeh.Mods.LicensePlateStyle = (LicensePlateStyle)new Random().Next(0, 5);
