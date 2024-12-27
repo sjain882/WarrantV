@@ -167,8 +167,9 @@ namespace WarrantV
             return RecString[0] + RecString[1];
         }
 
-        public static void BlipHandle(Ped cop, Blip blip, float[] Recog, Vector3 LastSeen, bool PlayerVisible)
+        public static int BlipHandle(Ped cop, Blip blip, float[] Recog, int TaskType, Vector3 LastSeen, bool PlayerVisible)
         {
+            int ReturnTaskType = TaskType;
             blip.Scale = Config.Numeric.CopBlipScale;
             blip.Priority = 10;
             blip.IsShortRange = false;
@@ -201,7 +202,7 @@ namespace WarrantV
                 Function.Call(Hash.SHOW_HEADING_INDICATOR_ON_BLIP, blip, Config.Bools.CopBlipHeadingIndicator);
                 Function.Call(Hash.SET_BLIP_SHOW_CONE, blip, EnableCone, 11);
             }
-            if ((cop.IsDead || !cop.Exists()) && cop.AttachedBlip != null) { blip.Delete(); return; }
+            if ((cop.IsDead || !cop.Exists()) && cop.AttachedBlip != null) { blip.Delete(); return 0; }
             if (cop.IsInVehicle())
             {
                 if ((cop.CurrentVehicle.GetPedOnSeat(VehicleSeat.Driver) == cop && cop.IsAlive) && !cop.CurrentVehicle.IsSeatFree(VehicleSeat.Passenger))
@@ -224,7 +225,7 @@ namespace WarrantV
             if (Recog[0] <= 20 || Recog[1] <= 20)
             {
                 blip.Color = BlipColor.Green;
-                if (Game.Player.WantedLevel == 0 && (Recog[0] < 20 || Recog[1] < 20) && PlayerVisible && Config.Bools.CopsDoTasks)
+                if (Game.Player.WantedLevel == 0 && TaskType == 0 && PlayerVisible && Config.Bools.CopsDoTasks)
                 {
                     cop.Task.LookAt(Game.Player.Character, 300);
                 }
@@ -233,7 +234,7 @@ namespace WarrantV
             {
                 blip.Color = BlipColor.GreenDark;
                 blip.Priority = 11;
-                if (Game.Player.WantedLevel == 0 && !cop.IsInVehicle() && (Recog[0] < 40 || Recog[1] < 40) && PlayerVisible && Config.Bools.CopsDoTasks)
+                if (Game.Player.WantedLevel == 0 && !cop.IsInVehicle() && TaskType == 0 && PlayerVisible && Config.Bools.CopsDoTasks)
                 {
                     cop.Task.LookAt(Game.Player.Character, 300);
                 }
@@ -242,10 +243,14 @@ namespace WarrantV
             {
                 blip.Color = BlipColor.Yellow;
                 blip.Priority = 12;
-                if (Game.Player.WantedLevel == 0 && !cop.IsInVehicle() && (Recog[0] < 60 && Recog[1] < 60) && PlayerVisible && Config.Bools.CopsDoTasks)
+                if (Game.Player.WantedLevel == 0 && !cop.IsInVehicle() && TaskType == 0 && PlayerVisible && Config.Bools.CopsDoTasks)
                 {
                     cop.Task.TurnTo(Game.Player.Character, 100);
                 }
+            }
+            if (LastSeen.DistanceTo2D(cop.Position) <= 5F)
+            {
+                //LastSeen = new Vector3();
             }
             if (LastSeen.DistanceTo2D(cop.Position) <= 5F)
             {
@@ -255,14 +260,40 @@ namespace WarrantV
             {
                 blip.Color = BlipColor.Orange;
                 blip.Priority = 13;
+                if (TaskType <= 1 && Game.Player.WantedLevel == 0 && Config.Bools.CopsDoTasks)
+                {
+                    if (!cop.IsInVehicle())
+                        cop.Task.GoStraightTo(LastSeen, -1, PedMoveBlendRatio.Walk, 0, 1f);
+                    else
+                        cop.Task.DriveTo(cop.CurrentVehicle, LastSeen, 40, VehicleDrivingFlags.SteerAroundPeds, 2f);
+                    if (LastSeen.DistanceTo(cop.Position) <= 3) 
+                        ReturnTaskType = 0;
+                    else 
+                        ReturnTaskType = 2;
+                    cop.KeepTaskWhenMarkedAsNoLongerNeeded = true;
+                }
             }
             if (Recog[0] > 80 || Recog[1] > 80)
             {
                 blip.Color = BlipColor.Red;
                 blip.Priority = 14;
+                if (TaskType <= 2 && Game.Player.WantedLevel == 0 && Config.Bools.CopsDoTasks)
+                {
+                    if (!cop.IsInVehicle()) 
+                        cop.Task.GoStraightTo(LastSeen, -1, PedMoveBlendRatio.Run, 0, 1f);
+                    else
+                        cop.Task.DriveTo(cop.CurrentVehicle, LastSeen, 70, VehicleDrivingFlags.DrivingModeAvoidVehiclesReckless, 2f);
+
+                    if 
+                        (LastSeen.DistanceTo2D(cop.Position) <= 1) ReturnTaskType = 0;
+                    else
+                        ReturnTaskType = 3;
+                    cop.KeepTaskWhenMarkedAsNoLongerNeeded = true;
+                }
+                
             }
-            if (Recog[0] > 60 || Recog[1] > 60 && Game.Player.WantedLevel==0 && Config.Bools.CopsDoTasks)
-            {
+            /*if (Recog[0] > 60 || Recog[1] > 60 && Game.Player.WantedLevel==0 && Config.Bools.CopsDoTasks) 
+            {fd
                 if (!cop.IsInVehicle())
                 {
                     if (Recog[0] < 80)
@@ -281,9 +312,10 @@ namespace WarrantV
                     else
                         cop.Task.DriveTo(cop.CurrentVehicle, LastSeen, 40, VehicleDrivingFlags.DrivingModeAvoidVehiclesReckless, 2f);
                 }
-            }
+            }*/
             if (Recog[0] >= 100 || Recog[1] >= 100)
             {
+                ReturnTaskType = 4;
                 blip.Color = BlipColor.RedDark;
                 blip.Priority = 15;
                 if (Config.Bools.ExtraBlipIndicators)
@@ -292,7 +324,7 @@ namespace WarrantV
                     if (Recog[1] >= 100) blip.ShowsFriendIndicator = true;
                 }
             }
-            return;
+            return ReturnTaskType;
         }
 
         public static bool IsPlayerVisible()
