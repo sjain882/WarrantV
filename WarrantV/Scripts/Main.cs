@@ -20,6 +20,7 @@ namespace WarrantV
         public static bool Even;
         public static int LastVehType = 0;
         public static bool OverrideMasked = false;
+        public static int keyDownDelay;
 
         public Main()
         {
@@ -35,7 +36,7 @@ namespace WarrantV
             Tick += EachTick.ChoiceMenus.Phones;
             Tick += EachTick.MaskNerf;
             Tick += EachTick.IVChases;
-            KeyDown += OnKeyEvents;
+            Tick += OnKeyEvents;
             Aborted += AbortedScript;
             Helpers.Load();
             if (Config.Bools.CrashAndEnterMessage)
@@ -47,9 +48,9 @@ namespace WarrantV
         }
         private static void OnKeyEvents(object sender, EventArgs e)
         {
-            if (EachTick.ChoiceMenus.bribing)
+            if (EachTick.ChoiceMenus.bribing && EachTick.BribingDelay<Game.GameTime)
             {
-                if (Game.IsKeyPressed(Config.ETC.OpenMenuKey) || Game.IsControlJustPressed(Control.Talk))
+                if (Game.IsKeyPressed(Config.ETC.OpenMenuKey) || Game.IsControlJustPressed(GTA.Control.SelectWeapon))
                 {
                     EachTick.ChoiceMenus.bribing = false;
                     Game.Player.SetControlState(true, SetPlayerControlFlags.LeaveCameraControlOn);
@@ -107,32 +108,36 @@ namespace WarrantV
                     }
                 }
             }
-            if (EachTick.ChoiceMenus.buying && Config.Bools.PlateChanging)
+            if (keyDownDelay < Game.GameTime)
             {
-                if (Game.IsKeyPressed(Config.ETC.PlateBuyKey) || Game.IsControlJustPressed(Control.Talk))
+                if (EachTick.ChoiceMenus.buying && Config.Bools.PlateChanging)
                 {
-                    if (Plates[Helpers.PlayerID()] < Config.Numeric.PlateMaxNum)
+                    if (Game.IsKeyPressed(Config.ETC.PlateBuyKey) || Game.IsControlPressed(Control.SelectWeapon))
                     {
-                        if (Game.Player.Money >= Config.Numeric.PlatePrice)
+                        keyDownDelay = Game.GameTime + 500;
+                        if (Plates[Helpers.PlayerID()] < Config.Numeric.PlateMaxNum)
                         {
-                            Game.Player.Money -= Config.Numeric.PlatePrice;
-                            Plates[Helpers.PlayerID()]++;
+                            if (Game.Player.Money >= Config.Numeric.PlatePrice)
+                            {
+                                Game.Player.Money -= Config.Numeric.PlatePrice;
+                                Plates[Helpers.PlayerID()]++;
+                            }
+                            else EachTick.ChoiceMenus.HelpMessageSellerDelay = -(Game.GameTime + 2500);
                         }
-                        else EachTick.ChoiceMenus.HelpMessageSellerDelay = -(Game.GameTime + 2500);
+                        else EachTick.ChoiceMenus.HelpMessageSellerDelay = Game.GameTime + 2500;
                     }
-                    else EachTick.ChoiceMenus.HelpMessageSellerDelay = Game.GameTime + 2500;
                 }
-            }
-            if (EachTick.ChoiceMenus.PlateChangeAble && Config.Bools.PlateChanging)
-            {
-                if (Game.IsKeyPressed(Config.ETC.PlateChange) || Game.IsControlJustPressed(Control.Talk))
+                if (EachTick.ChoiceMenus.PlateChangeAble && Config.Bools.PlateChanging)
                 {
-                    Plates[Helpers.PlayerID()]--;
-                    EachTick.ChoiceMenus.ClosestVeh.Mods.LicensePlateStyle = (LicensePlateStyle)new Random().Next(0, 5);
-                    EachTick.ChoiceMenus.ClosestVeh.Mods.LicensePlate = $"{Helpers.random.Next(10, 99)}{Helpers.RandomString(3)}{Helpers.random.Next(100, 999)}";
+                    if (Game.IsKeyPressed(Config.ETC.PlateChange) || Game.IsControlPressed(Control.SelectWeapon))
+                    {
+                        keyDownDelay = Game.GameTime + 500;
+                        Plates[Helpers.PlayerID()]--;
+                        EachTick.ChoiceMenus.ClosestVeh.Mods.LicensePlateStyle = (LicensePlateStyle)new Random().Next(0, 5);
+                        EachTick.ChoiceMenus.ClosestVeh.Mods.LicensePlate = $"{Helpers.random.Next(10, 99)}{Helpers.RandomString(3)}{Helpers.random.Next(100, 999)}";
+                    }
                 }
             }
-
         }
 
 

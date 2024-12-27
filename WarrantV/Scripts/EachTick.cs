@@ -11,6 +11,7 @@ namespace WarrantV
 {
     public static class EachTick
     {
+        public static int BribingDelay;
         public static List<Tuple<string[], int[]>> VehList = new List<Tuple<string[], int[]>>();
         public static (int[], int)[] RecognizedClothes = { (new int[30], new int()), (new int[30], new int()), (new int[30], new int()) };
         public static bool[] Recognized = new bool[2];
@@ -308,9 +309,10 @@ namespace WarrantV
                         {
                             if(Config.Bools.debug) Screen.ShowSubtitle($"player: {Game.Player.Character.Rotation} phone: {ClosestPhone.Rotation}");
 
-                            if (Game.IsKeyPressed(System.Windows.Forms.Keys.E) && Game.GameTime >= -(HelpMessagePhoneDelay))
+                            if ((Game.IsKeyPressed(System.Windows.Forms.Keys.E)||Game.IsControlJustPressed(Control.SelectWeapon)) && Game.GameTime >= -(HelpMessagePhoneDelay))
                             {
                                 bribing = true;
+                                BribingDelay = Game.GameTime + 500;
                                 PhonePickupDelay = Game.GameTime + 1100;
                                 Vector3 phoneFront = ClosestPhone.Position + ClosestPhone.ForwardVector * (-0.7f);
                                 Game.Player.Character.Task.GoStraightTo(new Vector3(phoneFront.X,phoneFront.Y,Game.Player.Character.Position.Z),1000,PedMoveBlendRatio.Walk,ClosestPhone.Heading, 0.3f);
@@ -325,7 +327,6 @@ namespace WarrantV
 
                 }
             }
-
             public static void Plates(object sender, EventArgs e)
             {
                 if (Config.Bools.PlateChanging)
