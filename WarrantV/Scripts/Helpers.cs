@@ -98,9 +98,11 @@ namespace WarrantV
             "prop_phonebox_03",
             "prop_phonebox_04",
             "cj_ny_phone_1",
-            "cj_ny_phone_2",
-            "cj_ny_phone_3",
-            "cj_ny_phone_4",
+            "cj_ny_phone_2", //podwojny telefon plecami do siebie
+            "cj_ny_phone_3", //poczworny telefon
+            "cj_ny_phone_4", //duzy podwojny telefon plecami do siebie
+
+            //modele sa w liberty_city/dlc1/x64/levels/gta5/liberty_city/props/street/amenitie.rpf
         };
         public static readonly Vector3[] PayAndSprayLocations = new Vector3[]
         {
