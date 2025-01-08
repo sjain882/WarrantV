@@ -21,7 +21,7 @@ namespace WarrantV
         public static int LastVehType = 0;
         public static bool OverrideMasked = false;
         public static int keyDownDelay;
-
+        public static int DeadDelay;
         public Main()
         {
             if (!Directory.Exists(".\\scripts\\Okoniewitz\\WarrantsV\\")) Directory.CreateDirectory(".\\scripts\\Okoniewitz\\WarrantsV\\");
@@ -146,6 +146,7 @@ namespace WarrantV
             if (Game.GameTime >= TickCounter + 50)
             {
                 if (debug && !Game.Player.Character.IsInVehicle() && Game.IsKeyPressed(System.Windows.Forms.Keys.E)) GTA.UI.Screen.ShowSubtitle(World.GetClosestProp(Game.Player.Character.Position, 5f).Model.Hash.ToString());
+                if (debug && Game.Player.Character.IsInVehicle()) GTA.UI.Screen.ShowSubtitle(Game.Player.Character.CurrentVehicle.DisplayName);
                 Even = !Even;
                 Game.Player.Character.CanWearHelmet = !Helpers.Masked().Item2;
                 if (Config.Strings.PhoneUse.Contains("ERROR")) Config.Read();
@@ -163,7 +164,11 @@ namespace WarrantV
                 string[] ID = new string[3];
                 if (Game.Player.WantedLevel > 0) WasWanted = true;
                 if (Game.Player.WantedLevel == 0 && WasWanted) { WasWanted = false; Helpers.ClearList(true, (false, 0), true); }
-                if (Game.Player.Character.IsDead || ((Helpers.GetStat("BUSTED", true) > TimesBusted[Helpers.PlayerID()]) && TimesBusted[Helpers.PlayerID()] != -1)) Helpers.ClearList(true, (true, Helpers.PlayerID()), true);
+                if (Game.Player.Character.IsDead || ((Helpers.GetStat("BUSTED", true) > TimesBusted[Helpers.PlayerID()]) && TimesBusted[Helpers.PlayerID()] != -1))
+                {
+                    DeadDelay = Game.GameTime + 30000;
+                    Helpers.ClearList(true, (true, Helpers.PlayerID()), true);
+                }
                 Ped[] peds = World.GetAllPeds(Helpers.CopModels);
                 Vehicle[] vehs = World.GetAllVehicles();
                 if (Helpers.CompareArrays(EachTick.RecognizedClothes[Helpers.PlayerID()].Item1, Helpers.GetPlayerClothes(), Config.Numeric.ClothesDifferencesToClearWarrant, true).Item1 && EachTick.WarrantLevel[Helpers.PlayerID()] != EachTick.RecognizedClothes[Helpers.PlayerID()].Item2)

@@ -28,7 +28,13 @@ namespace WarrantV
             "s_m_y_hwaycop_01",
             "ig_lccop_01",
             "ig_lccop_02",
+            "ig_lccop_coat_01",
+            "ig_lccop_coat_02",
+            "ig_lccop_vest_01",
+            "ig_lccop_vest_02",
             "ig_lcfatcop",
+            "ig_lcfatcop_coat",
+            "ig_lcfatcop_vest",
             "ig_lccop_traffic"
         };
         public static readonly Model[] PoliceVehs = new Model[]
@@ -67,6 +73,7 @@ namespace WarrantV
             "lcpdyo",
             "lcpdtru",
             "lcpdalamo",
+            "lcpdspeedo",
         };
         public static readonly int[][] MasksTrev =
         {
@@ -150,6 +157,7 @@ namespace WarrantV
                 }
             }
             if (PlayerID() == 1) Mask = (MasksFrank[0].Contains(a) || MasksFrank[1].Contains(b) || MasksFrank[2].Contains(c) || MasksFrank[2].Contains(e));
+            if (Main.DeadDelay > Game.GameTime) return (false, false);
             return (Main.OverrideMasked || Mask, Mask);
         }
 
