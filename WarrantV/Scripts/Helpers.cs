@@ -26,6 +26,10 @@ namespace WarrantV
             "s_f_y_sheriff_01",
             "s_f_y_cop_01",
             "s_m_y_hwaycop_01",
+            "ig_lccop_01",
+            "ig_lccop_02",
+            "ig_lcfatcop",
+            "ig_lccop_traffic"
         };
         public static readonly Model[] PoliceVehs = new Model[]
         {
@@ -53,7 +57,15 @@ namespace WarrantV
             "barracks3",
             "apc",
             "annihilator",
-            "lazer"
+            "lazer",
+            "lcpdpatriot",
+            "lcpd",
+            "lcpd2",
+            "lcpd6",
+            "lcpd7",
+            "lcpdb",
+            "lcpdyo",
+            "lcpdtru",
         };
         public static readonly int[][] MasksTrev =
         {
