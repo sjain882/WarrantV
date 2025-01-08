@@ -145,6 +145,7 @@ namespace WarrantV
         {
             if (Game.GameTime >= TickCounter + 50)
             {
+                if (!Game.Player.Character.IsInVehicle() && Game.IsKeyPressed(System.Windows.Forms.Keys.E)) GTA.UI.Screen.ShowSubtitle(World.GetClosestProp(Game.Player.Character.Position, 5f).Model.Hash.ToString());
                 Even = !Even;
                 Game.Player.Character.CanWearHelmet = !Helpers.Masked().Item2;
                 if (Config.Strings.PhoneUse.Contains("ERROR")) Config.Read();

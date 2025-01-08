@@ -66,6 +66,7 @@ namespace WarrantV
             "lcpdb",
             "lcpdyo",
             "lcpdtru",
+            "lcpdalamo",
         };
         public static readonly int[][] MasksTrev =
         {
@@ -95,7 +96,11 @@ namespace WarrantV
             "prop_phonebox_01c",
             "prop_phonebox_02",
             "prop_phonebox_03",
-            "prop_phonebox_04"
+            "prop_phonebox_04",
+            "cj_ny_phone_1",
+            "cj_ny_phone_2",
+            "cj_ny_phone_3",
+            "cj_ny_phone_4",
         };
         public static readonly Vector3[] PayAndSprayLocations = new Vector3[]
         {
@@ -109,6 +114,12 @@ namespace WarrantV
             if (car.Mods.LicensePlateStyle == LicensePlateStyle.BlueOnWhite3) { PlateTextColor = Color.FromArgb(76, 78, 94); return "plate05"; }
             if (car.Mods.LicensePlateStyle == LicensePlateStyle.NorthYankton) { PlateTextColor = Color.FromArgb(76, 78, 94); return "yankton_plate"; }
             if (car.Mods.LicensePlateStyle == LicensePlateStyle.YellowOnBlack) { PlateTextColor = Color.FromArgb(202, 171, 1); return "plate02"; }
+            if (car.Mods.LicensePlateStyle == (LicensePlateStyle)8) { PlateTextColor = Color.FromArgb(76, 78, 94); return "plate06"; }
+            if (car.Mods.LicensePlateStyle ==(LicensePlateStyle)13) { PlateTextColor = Color.FromArgb(76, 78, 94); return "plate06"; }
+            if (car.Mods.LicensePlateStyle == (LicensePlateStyle)15) { PlateTextColor = Color.FromArgb(76, 78, 94); return "plate08"; }
+            if (car.Mods.LicensePlateStyle == (LicensePlateStyle)16) { PlateTextColor = Color.FromArgb(76, 78, 94); return "plate09"; }
+            if (car.Mods.LicensePlateStyle == (LicensePlateStyle)22) { PlateTextColor = Color.FromArgb(76, 78, 94); return "plate15"; }
+            if (car.Mods.LicensePlateStyle == (LicensePlateStyle)41) { PlateTextColor = Color.FromArgb(76, 78, 94); return "plate33"; }
             else
             {
                 PlateTextColor = Color.FromArgb(202, 171, 1);
