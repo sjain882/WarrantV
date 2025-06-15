@@ -35,12 +35,12 @@
     <Reference Include="LemonUI.SHVDN3, Version=1.2.0.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\LemonUI.SHVDN3.1.2.0\lib\net48\LemonUI.SHVDN3.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ScriptHookVDotNet3, Version=3.0.4.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\OneDrive\Backupy\Programowanie\GTA 5 Scripts\ScriptHookVDotNet3.dll</HintPath>
+      <HintPath>..\..\ScriptHookVDotNet\Nightly\20\ScriptHookVDotNet3.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
